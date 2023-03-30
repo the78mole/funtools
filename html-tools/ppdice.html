@@ -2,19 +2,87 @@
 <html>
   <head>
     <title>Story Point Teller</title>
-    <script>
-        function randomNumber() {
-          var numbers = [1, 2, 2, 2, 3, 3, 3, 3, 5, 5, 5, 5, 8, 8, 13, 20, 40, 100]; // Valid story points
-          var randomIndex = Math.floor(Math.random() * numbers.length); // zufälliger Index auswählen
-          var randomElement = numbers[randomIndex]; // das Element aus der Liste mit dem zufälligen Index auswählen
-          document.getElementById("result").innerHTML = randomElement; // Ergebnis auf der Seite ausgeben
+    <style>
+      .sanduhr {
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 50px;
+        height: 50px;
+        border: 10px solid #ccc;
+        border-top-color: #f00;
+        border-radius: 50%;
+        animation: sanduhr-anim 1s linear infinite;
+      }
+      
+      @keyframes sanduhr-anim {
+        to {
+          transform: translate(-50%, -50%) rotate(360deg);
         }
+      }
+    </style>
+    <script>
+//        function randomNumber() {
+//          var numbers = [1, 2, 2, 2, 3, 3, 3, 3, 5, 5, 5, 5, 8, 8, 13, 20, 40, 100]; // Valid story points
+//          var randomIndex = Math.floor(Math.random() * numbers.length); // zufälliger Index auswählen
+//          var randomElement = numbers[randomIndex]; // das Element aus der Liste mit dem zufälligen Index auswählen
+//          document.getElementById("result").innerHTML = randomElement; // Ergebnis auf der Seite ausgeben
+//        }
+function randomNumber() {
+  var guessbtn = document.getElementById("guessbtn");
+  var result = document.getElementById("result");
+  var sanduhr = document.getElementById("sanduhr");
+
+  var numbers = [
+    { number: 1, probability: 10 },
+          { number: 2, probability: 50 },
+          { number: 3, probability: 100 },
+          { number: 5, probability: 40 },
+          { number: 8, probability: 20 },
+          { number: 13, probability: 10 },
+          { number: 20, probability: 5 },
+          { number: 40, probability: 1 },
+          { number: 100, probability: 0.5 }
+        ]; // Ihre Liste von Zahlen mit Wahrscheinlichkeiten
+        
+        var totalProbability = 0;
+        for (var i = 0; i < numbers.length; i++) {
+          totalProbability += numbers[i].probability;
+        }
+        
+        var random = Math.random() * totalProbability; // zufällige Zahl zwischen 0 und der Gesamtsumme der Wahrscheinlichkeiten generieren
+        var sum = 0;
+        
+        for (var i = 0; i < numbers.length; i++) {
+          sum += numbers[i].probability;
+          if (random < sum) {
+            var randomElement = numbers[i].number; // das Element aus der Liste mit der entsprechenden Wahrscheinlichkeit auswählen
+            break;
+          }
+        }
+        
+        var randomTime = Math.floor(Math.random() * 5000); // zufällige Verzögerung zwischen 0 und 3 Sekunden in Millisekunden generieren
+        guessbtn.disabled = true;
+        sanduhr.style.display = "block"; // Sanduhr anzeigen
+
+        setTimeout(function() {
+          result.innerHTML = randomElement; // Ergebnis auf der Seite ausgeben      }
+          guessbtn.disabled = false;
+          sanduhr.style.display = "none"; // Sanduhr anzeigen
+        }, randomTime)
+
+      }
     </script>
   </head>
   <body>
     <h1>Story Point Wizard</h1>
     <p>Please push the button to get the correct number of story points for the currently discussed story:</p>
-    <button onclick="randomNumber()">Zufällige Zahl auswählen</button>
+    <button id="guessbtn" onclick="randomNumber()">Estimate the issue</button>
+
+    <p><div id="sanduhr" class="sanduhr"></div></p>
+
     <p>The issue has definitely <span id="result">?</span> story points</p>
   </body>
 </html>
