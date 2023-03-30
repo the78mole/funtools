@@ -3,6 +3,16 @@
   <head>
     <title>Story Point Teller</title>
     <style>
+      .waittext {
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align:center;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 20px;
+      }
       .sanduhr {
         display: none;
         position: absolute;
@@ -14,7 +24,7 @@
         border: 10px solid #ccc;
         border-top-color: #f00;
         border-radius: 50%;
-        animation: sanduhr-anim 1s linear infinite;
+        animation: sanduhr-anim 3s linear infinite;
       }
       
       @keyframes sanduhr-anim {
@@ -63,14 +73,16 @@ function randomNumber() {
           }
         }
         
-        var randomTime = Math.floor(Math.random() * 5000); // zufällige Verzögerung zwischen 0 und 3 Sekunden in Millisekunden generieren
+        var randomTime = Math.floor((Math.random() * 4000) + 1000); // zufällige Verzögerung zwischen 0 und 3 Sekunden in Millisekunden generieren
         guessbtn.disabled = true;
         sanduhr.style.display = "block"; // Sanduhr anzeigen
+        waittext.style.display = "block"; // Waittext anzeigen
 
         setTimeout(function() {
           result.innerHTML = randomElement; // Ergebnis auf der Seite ausgeben      }
           guessbtn.disabled = false;
           sanduhr.style.display = "none"; // Sanduhr anzeigen
+          waittext.style.display = "none"; // Waittext anzeigen
         }, randomTime)
 
       }
@@ -81,7 +93,10 @@ function randomNumber() {
     <p>Please push the button to get the correct number of story points for the currently discussed story:</p>
     <button id="guessbtn" onclick="randomNumber()">Estimate the issue</button>
 
-    <p><div id="sanduhr" class="sanduhr"></div></p>
+    <p>
+      <div id="sanduhr" class="sanduhr"></div>
+      <div id="waittext" class="waittext">Calculating story points...</div>
+    </p>
 
     <p>The issue has definitely <span id="result">?</span> story points</p>
   </body>
