@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Story Point Teller</title>
+    <script>
+        function randomNumber() {
+          var numbers = [2, 3, 5, 8, 13, 20, 40, 100]; // Valid story points
+          var randomIndex = Math.floor(Math.random() * numbers.length); // zufälliger Index auswählen
+          var randomElement = numbers[randomIndex]; // das Element aus der Liste mit dem zufälligen Index auswählen
+          document.getElementById("result").innerHTML = randomElement; // Ergebnis auf der Seite ausgeben
+        }
+    </script>
+  </head>
+  <body>
+    <h1>Story Point Wizard</h1>
+    <p>Please push the button to get the correct number of story points for the currently discussed story:</p>
+    <button onclick="randomNumber()">Zufällige Zahl auswählen</button>
+    <p>The issue has definitely <span id="result">?</span> story points</p>
+  </body>
+</html>
