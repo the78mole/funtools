@@ -12,18 +12,27 @@
             // Holen Sie den Meeting-Namen aus dem Textfeld
             var meetingName = document.getElementById("meeting-name").value;
             // Überprüfen Sie, ob der Meeting-Name "plan" enthält
-            var containsPlan = meetingName.toLowerCase().includes("plan");
             // Erzeugen Sie eine zufällige Zahl zwischen 0 und 1
             var randomNum = Math.random();
             // Wenn der Meeting-Name "plan" enthält, ist die Wahrscheinlichkeit für "nicht notwendig" 90%
-            console.log("RandomNum :" + randomNum + (containsPlan ? " (plan)" : ""));
-            if ((containsPlan && randomNum < 0.9) || randomNum < 0.5) {
-                document.getElementById("result-box").innerHTML = "Das Meeting \"" + meetingName + "\" ist nicht notwendig.";
-                document.getElementById("result-box").className = "green"; // Hintergrundfarbe für "nicht notwendig"
-            } else {
-                // Wenn der Meeting-Name "plan" nicht enthält, ist die Wahrscheinlichkeit für "notwendig" 50%
+            console.log("RandomNum :" + randomNum);
+
+            var need = false;
+            if (meetingName.toLowerCase().includes("beer") || meetingName.toLowerCase().includes("bier")) 
+                need = true;
+            else if (meetingName.toLowerCase().includes("plan") && randomNum < 0.1)
+                need = true;
+            else if (randomNum < 0.5) 
+                need = true;
+            else
+                need = false;
+            
+            if (need) {
                 document.getElementById("result-box").innerHTML = "Das Meeting \"" + meetingName + "\" ist notwendig.";
                 document.getElementById("result-box").className = "red"; // Hintergrundfarbe für "notwendig"
+            } else {
+                document.getElementById("result-box").innerHTML = "Das Meeting \"" + meetingName + "\" ist nicht notwendig.";
+                document.getElementById("result-box").className = "green"; // Hintergrundfarbe für "nicht notwendig"
             }
         }
     </script>
