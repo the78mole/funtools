@@ -18,14 +18,17 @@
             console.log("RandomNum :" + randomNum);
 
             var need = false;
-            if (meetingName.toLowerCase().includes("beer") || meetingName.toLowerCase().includes("bier")) 
+            if (meetingName.toLowerCase().includes("beer") || meetingName.toLowerCase().includes("bier")) {
                 need = true;
-            else if (meetingName.toLowerCase().includes("plan") && randomNum < 0.1)
+            } else if (meetingName.toLowerCase().includes("plan")) {
+                if(randomNum < 0.1) {
+                    need = true;
+                }
+            } else if (randomNum < 0.5) {
                 need = true;
-            else if (randomNum < 0.5) 
-                need = true;
-            else
+            } else {
                 need = false;
+            }
             
             if (need) {
                 document.getElementById("result-box").innerHTML = "Das Meeting \"" + meetingName + "\" ist notwendig.";
