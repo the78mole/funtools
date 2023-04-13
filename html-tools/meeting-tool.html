@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Meeting-Tool</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <meta charset="UTF-8">
+  </head>
+  <body>
+    <h1>Meeting-Tool</h1>
+    <p>Geben Sie einen Meeting-Namen ein und klicken Sie auf den Button, um zu sehen, ob das Meeting notwendig ist.</p>
+    <label for="meeting-name">Meeting-Name:</label>
+    <input type="text" id="meeting-name">
+    <button onclick="checkMeeting()">Meeting überprüfen</button>
+    <p id="result"></p>
+    <script>
+      function checkMeeting() {
+        // Holen Sie den Meeting-Namen aus dem Textfeld
+        var meetingName = document.getElementById("meeting-name").value;
+        // Erzeugen Sie eine zufällige Zahl zwischen 0 und 1
+        var randomNum = Math.random();
+        // Wenn die zufällige Zahl kleiner als 0,5 ist, ist das Meeting notwendig
+        if (randomNum < 0.7) {
+          document.getElementById("result").innerHTML = "Das Meeting \"" + meetingName + "\" ist notwendig.";
+        } else {
+          document.getElementById("result").innerHTML = "Das Meeting \"" + meetingName + "\" ist nicht notwendig.";
+        }
+      }
+    </script>
+  </body>
+</html>
