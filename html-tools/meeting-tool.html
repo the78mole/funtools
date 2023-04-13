@@ -7,27 +7,88 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <meta charset="UTF-8">
+    <script>
+        function checkMeeting() {
+            // Holen Sie den Meeting-Namen aus dem Textfeld
+            var meetingName = document.getElementById("meeting-name").value;
+            // Überprüfen Sie, ob der Meeting-Name "plan" enthält
+            var containsPlan = meetingName.toLowerCase().includes("plan");
+            // Erzeugen Sie eine zufällige Zahl zwischen 0 und 1
+            var randomNum = Math.random();
+            // Wenn der Meeting-Name "plan" enthält, ist die Wahrscheinlichkeit für "nicht notwendig" 90%
+            console.log("RandomNum :" + randomNum + (containsPlan ? " (plan)" : ""));
+            if ((containsPlan && randomNum < 0.9) || randomNum < 0.5) {
+                document.getElementById("result-box").innerHTML = "Das Meeting \"" + meetingName + "\" ist nicht notwendig.";
+                document.getElementById("result-box").className = "green"; // Hintergrundfarbe für "nicht notwendig"
+            } else {
+                // Wenn der Meeting-Name "plan" nicht enthält, ist die Wahrscheinlichkeit für "notwendig" 50%
+                document.getElementById("result-box").innerHTML = "Das Meeting \"" + meetingName + "\" ist notwendig.";
+                document.getElementById("result-box").className = "red"; // Hintergrundfarbe für "notwendig"
+            }
+        }
+    </script>
+    <style>
+            body {
+              margin-top: 10%;
+              justify-content: center;
+              align-items: center;
+              text-align: center;
+              height: 100vh;
+            }
+            .waittext {
+              display: none;
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              text-align:center;
+              font-family: 'Courier New', Courier, monospace;
+              font-size: 20px;
+            }
+            .sanduhr {
+              display: none;
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              width: 50px;
+              height: 50px;
+              border: 10px solid #ccc;
+              border-top-color: #f00;
+              border-radius: 50%;
+              animation: sanduhr-anim 3s linear infinite;
+            }
+            
+            @keyframes sanduhr-anim {
+              to {
+                transform: translate(-50%, -50%) rotate(360deg);
+              }
+            }
+            #result-box {
+                padding: 10px;
+                margin-top: 10px;
+                font-size: 20px;
+                font-weight: bold;
+                text-align: center;
+                color: white;
+                border-radius: 5px;
+            }
+            /* Stile für die grüne Hintergrundfarbe */
+            #result-box.green {
+                background-color: green;
+            }
+            /* Stile für die rote Hintergrundfarbe */
+            #result-box.red {
+                background-color: red;
+            }
+    </style>      
   </head>
   <body>
     <h1>Meeting-Tool</h1>
     <p>Geben Sie einen Meeting-Namen ein und klicken Sie auf den Button, um zu sehen, ob das Meeting notwendig ist.</p>
     <label for="meeting-name">Meeting-Name:</label>
-    <input type="text" id="meeting-name">
+    <input type="text" id="meeting-name" value="Sprint Planning">
     <button onclick="checkMeeting()">Meeting überprüfen</button>
-    <p id="result"></p>
-    <script>
-      function checkMeeting() {
-        // Holen Sie den Meeting-Namen aus dem Textfeld
-        var meetingName = document.getElementById("meeting-name").value;
-        // Erzeugen Sie eine zufällige Zahl zwischen 0 und 1
-        var randomNum = Math.random();
-        // Wenn die zufällige Zahl kleiner als 0,5 ist, ist das Meeting notwendig
-        if (randomNum < 0.7) {
-          document.getElementById("result").innerHTML = "Das Meeting \"" + meetingName + "\" ist notwendig.";
-        } else {
-          document.getElementById("result").innerHTML = "Das Meeting \"" + meetingName + "\" ist nicht notwendig.";
-        }
-      }
-    </script>
+    <p id="result-box"></p>
   </body>
 </html>
