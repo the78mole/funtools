@@ -31,10 +31,10 @@
             }
             
             if (need) {
-                document.getElementById("result-box").innerHTML = "Das Meeting \"" + meetingName + "\" ist notwendig.";
+                document.getElementById("result-box").innerHTML = "The meeting \"" + meetingName + "\" is needed.";
                 document.getElementById("result-box").className = "red"; // Hintergrundfarbe für "notwendig"
             } else {
-                document.getElementById("result-box").innerHTML = "Das Meeting \"" + meetingName + "\" ist nicht notwendig.";
+                document.getElementById("result-box").innerHTML = "The meeting \"" + meetingName + "\" is not needed.";
                 document.getElementById("result-box").className = "green"; // Hintergrundfarbe für "nicht notwendig"
             }
         }
@@ -97,10 +97,10 @@
   </head>
   <body>
     <h1>Meeting-Tool</h1>
-    <p>Geben Sie einen Meeting-Namen ein und klicken Sie auf den Button, um zu sehen, ob das Meeting notwendig ist.</p>
-    <label for="meeting-name">Meeting-Name:</label>
+    <p>Put a title for the meeting into the text field and click on the button to evaluate if the meeting is needed.</p>
+    <label for="meeting-name">Meeting name:</label>
     <input type="text" id="meeting-name" value="Sprint Planning">
-    <button onclick="checkMeeting()">Meeting überprüfen</button>
+    <button onclick="checkMeeting()">Check meeting</button>
     <p id="result-box"></p>
   </body>
 </html>
