@@ -16,10 +16,15 @@
             var randomNum = Math.random();
             // Wenn der Meeting-Name "plan" enthält, ist die Wahrscheinlichkeit für "nicht notwendig" 90%
             console.log("RandomNum :" + randomNum);
+            var addText = "";
 
             var need = false;
             if (meetingName.toLowerCase().includes("beer") || meetingName.toLowerCase().includes("bier")) {
                 need = true;
+                addText = "Please bring your own cups!!! <br>"
+            } else if (meetingName.toLowerCase().includes("retro")) {
+                need = false;
+                addText = "In the words of the chief: The retro nonsense only keeps us from working, can we please use our time wisely? <br>";
             } else if (meetingName.toLowerCase().includes("plan")) {
                 if(randomNum < 0.1) {
                     need = true;
@@ -34,7 +39,7 @@
                 document.getElementById("result-box").innerHTML = "The meeting \"" + meetingName + "\" is needed.";
                 document.getElementById("result-box").className = "red"; // Hintergrundfarbe für "notwendig"
             } else {
-                document.getElementById("result-box").innerHTML = "The meeting \"" + meetingName + "\" is not needed.";
+                document.getElementById("result-box").innerHTML = addText + "The meeting \"" + meetingName + "\" is not needed.";
                 document.getElementById("result-box").className = "green"; // Hintergrundfarbe für "nicht notwendig"
             }
         }
